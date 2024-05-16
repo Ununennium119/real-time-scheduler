@@ -30,5 +30,6 @@ Currently, it can schedule tasks using the `Bretley` and `non-preemptive EDF` al
    - Execute `main.py` to run the sample application:
 
         ```sh
+        cd src
         python main.py
         ```
