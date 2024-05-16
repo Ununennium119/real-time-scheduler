@@ -11,7 +11,7 @@ class Task:
         return value.id == self.id
     
     def __repr__(self) -> str:
-        return f'Task(id={self.id})'
+        return f'{self.id}'
     
     def __str__(self) -> str:
         return self.__repr__()

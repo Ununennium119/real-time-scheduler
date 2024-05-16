@@ -1,5 +1,6 @@
 from task import Task
 from scheduler import Scheduler
+from anytree import Node, RenderTree
 
 def main():
     tasks = [
@@ -11,17 +12,25 @@ def main():
     ]
     scheduler = Scheduler(tasks=tasks)
 
-    bretly_schedule = scheduler.schedule_bretly(print_tree=True)
-    print(f'Schedule using Bretly: {bretly_schedule}')
+    print("Scheduling using Bretly algorithm...")
+    root_node = Node('')
+    bretly_schedule = scheduler.schedule_bretly(root_node)
+    render_tree(root_node)
+    print(f'Schedule: {bretly_schedule}')
     scheduler.print_schedule(bretly_schedule)
     print(f'Maximum Lateness: {Scheduler.calculate_maximum_lateness(schedule=bretly_schedule)}')
     
     print('--------------------------------------------------')
     
+    print("Scheduling using non-preemptive EDF algorithm...")
     edf_schedule = scheduler.schedule_edf()
-    print(f'Schedule using Bretly: {edf_schedule}')
+    print(f'Schedule: {edf_schedule}')
     scheduler.print_schedule(bretly_schedule)
     print(f'Maximum Lateness: {Scheduler.calculate_maximum_lateness(schedule=edf_schedule)}')
+
+def render_tree(root_node: Node):
+    for pre, _, node in RenderTree(root_node):
+        print("%s%s" % (pre, node.name))
 
 if __name__ == '__main__':
     main()
